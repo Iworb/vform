@@ -2,7 +2,7 @@
   "name": "vform",
   "version": "1.0.1",
   "description": "A simple way to handle Laravel back-end validation in Vue.",
-  "main": "dist/vform.common.js",
+  "main": "src/index.js",
   "unpkg": "dist/vform.umd.js",
   "files": [
     "src",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cretueusebiu/vform.git"
+    "url": "git+https://github.com/iworb/vform.git"
   },
   "keywords": [
     "vue",

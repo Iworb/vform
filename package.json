@@ -2,7 +2,7 @@
   "name": "vform",
   "version": "1.0.1",
   "description": "A simple way to handle Laravel back-end validation in Vue.",
-  "main": "src/index.js",
+  "main": "dist/vform.common.js",
   "unpkg": "dist/vform.umd.js",
   "files": [
     "src",

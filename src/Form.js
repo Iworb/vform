@@ -9,10 +9,24 @@ class Form {
    * @param {Object} data
    */
   constructor (data = {}) {
-    this.busy = false
-    this.successful = false
-    this.errors = new Errors()
-    this.originalData = deepCopy(data)
+    Object.defineProperties(this, {
+      busy: {
+        writable: true,
+        value: false
+      },
+      successful: {
+        writable: true,
+        value: false
+      },
+      errors: {
+        writable: true,
+        value: new Errors()
+      },
+      originalData: {
+        writable: true,
+        value: deepCopy(data)
+      }
+    })
 
     Object.assign(this, data)
   }
@@ -46,7 +60,6 @@ class Form {
    */
   keys () {
     return Object.keys(this)
-      .filter(key => !Form.ignore.includes(key))
   }
 
   /**
@@ -79,7 +92,6 @@ class Form {
    */
   reset () {
     Object.keys(this)
-      .filter(key => !Form.ignore.includes(key))
       .forEach(key => {
         this[key] = deepCopy(this.originalData[key])
       })
@@ -176,19 +188,29 @@ class Form {
    * @return {Object}
    */
   extractErrors (response) {
-    if (!response.data || typeof response.data !== 'object') {
+    const data = response.data
+
+    if (!data || typeof data !== 'object') {
       return { error: Form.errorMessage }
     }
 
-    if (response.data.errors) {
-      return { ...response.data.errors }
+    if (data.errors) {
+      return { ...data.errors }
     }
 
-    if (response.data.message) {
-      return { error: response.data.message }
+    if (data.message) {
+      return { error: data.message }
     }
 
-    return { ...response.data }
+    if (data.error && data.error.message) {
+      if (typeof data.error.message === 'object') {
+        return { ...data.error.message }
+      } else {
+        return { error: data.error.message }
+      }
+    }
+
+    return { ...data }
   }
 
   /**
@@ -230,6 +252,5 @@ class Form {
 
 Form.routes = {}
 Form.errorMessage = 'Something went wrong. Please try again.'
-Form.ignore = ['busy', 'successful', 'errors', 'originalData']
 
 export default Form

@@ -1,6 +1,6 @@
 {
   "name": "vform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple way to handle Laravel back-end validation in Vue.",
   "main": "dist/vform.common.js",
   "unpkg": "dist/vform.umd.js",
@@ -24,6 +24,12 @@
     "laravel"
   ],
   "author": "Cretu Eusebiu",
+  "contributors": [
+    {
+      "name": "Aleksandr Koshevierov",
+      "email": "iworb.ne@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cretueusebiu/vform/issues"
